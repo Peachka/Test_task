@@ -30,30 +30,31 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import com.example.testtaskheartrate.R
-
+import com.example.testtaskheartrate.ui.loading_screen.LoadingScreen
+import com.example.testtaskheartrate.ui.theme.dimens
 
 @Composable
 fun OnboardingPage1(
-    onNextPage: () -> Unit,
     currentPageIndex: Int,
+    onNextPage: () -> Unit,
     onPageIndexChanged: (Int) -> Unit
 ) {
-
-    Box(
+    Column(
         modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.primary)
+            .fillMaxSize(),
+//            .background(MaterialTheme.colorScheme.primary),
+        verticalArrangement = Arrangement.SpaceBetween,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Column(
-            modifier = Modifier
-                .background(MaterialTheme.colorScheme.primary)
-                .fillMaxSize()
-                .padding(WindowInsets.systemBars.asPaddingValues()),
-
+            horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier.fillMaxWidth()
+                .padding(top = 20.dp)
         ) {
             Image(
                 painter = painterResource(id = R.drawable.onboarding_img_1),
@@ -61,25 +62,43 @@ fun OnboardingPage1(
                 modifier = Modifier
                     .size(200.dp)
             )
-            Spacer(modifier = Modifier.height(24.dp))
+            Spacer(modifier = Modifier.height(MaterialTheme.dimens.medium3))
             Text(
                 text = "Ваш трекер тиску",
-                fontSize = 20.sp
+                style = MaterialTheme.typography.headlineSmall,
+                textAlign = TextAlign.Center,
+                modifier = Modifier.fillMaxWidth()
             )
-            Text(text = "Зазначайте, відстежуйте та аналізуйте свої показники артеріального тиску.",
-                modifier = Modifier.padding(16.dp))
-            Spacer(modifier = Modifier.height(216.dp))
+            Text(
+                text = "Зазначайте, відстежуйте та аналізуйте свої показники артеріального тиску.",
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                style = MaterialTheme.typography.labelMedium,
+                textAlign = TextAlign.Center
+            )
+        }
 
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxWidth()
+        ) {
             DotsIndicator(
                 totalDots = 3,
                 currentDotIndex = currentPageIndex
-
             )
-            Row {
-                Button(modifier = Modifier
+            Row(
+                modifier = Modifier
                     .fillMaxWidth()
-                    .height(60.dp)
-                    .padding(2.dp),
+                    .padding(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.Center
+            ) {
+                Button(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(46.dp)
+                        .padding(2.dp),
                     colors = ButtonDefaults.buttonColors(
                         containerColor = MaterialTheme.colorScheme.secondary,
                         contentColor = Color.White,
@@ -92,11 +111,19 @@ fun OnboardingPage1(
                         onPageIndexChanged(1)
                     }
                 ) {
-                    Text(text = "Почати!",
-                        Modifier.background(MaterialTheme.colorScheme.secondary))
+                    Text(
+                        text = "Почати!",
+                        modifier = Modifier.background(MaterialTheme.colorScheme.secondary)
+                    )
                 }
             }
         }
     }
 }
 
+//@Preview
+//@Composable
+//fun PreviewPage1(){
+//    OnboardingPage1( 1, {},{ 1} )
+//}
+//

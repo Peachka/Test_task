@@ -1,7 +1,6 @@
 package com.example.testtaskheartrate.ui.scan_heartbeat
 
 import android.content.Context
-import android.util.Log
 
 import androidx.camera.view.PreviewView
 import androidx.compose.foundation.layout.*
@@ -28,7 +27,6 @@ import androidx.compose.animation.core.infiniteRepeatable
 import androidx.compose.animation.core.rememberInfiniteTransition
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 
 import androidx.compose.foundation.layout.Box
@@ -39,17 +37,27 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.scale
 
 import androidx.compose.ui.res.painterResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.LifecycleOwner
 import com.example.testtaskheartrate.R
+import com.example.testtaskheartrate.data.model.BPMHistory
+import com.example.testtaskheartrate.ui.indicator_screen.IndicatorViewModel
 import com.example.testtaskheartrate.ui.scan_heartbeat.utils.HeartBeatDetector
-import com.example.testtaskheartrate.ui.scan_heartbeat.utils.getCurrentDateTime
 
 @Composable
-fun MeasureScreen(onResult: (Int) -> Unit) {
+fun MeasureScreen(onResult: (Int) -> Unit,
+                  onBack: () -> Unit,
+                  viewModel: IndicatorViewModel = hiltViewModel()) {
     val heartBeatDetector = remember { HeartBeatDetector() }
     var heartRate by remember { mutableStateOf(-1) }
     var progress by remember { mutableStateOf(0f) }
-    var isMeasuring by remember { mutableStateOf(false) }
+    var isMeasuring by remember { mutableStateOf(true) }
+
+    val heartRateList = remember { mutableListOf<Int>() }
+
+
+
+    val dateTime by viewModel.dateTime.collectAsState()
 
     val infiniteTransition = rememberInfiniteTransition(label = "")
 
@@ -68,17 +76,25 @@ fun MeasureScreen(onResult: (Int) -> Unit) {
             while (progress < 1f) {
                 delay(100)
                 progress += 0.01f
+                heartRate = heartBeatDetector.getHeartRate()
+                if (heartRate>0) {
+                    heartRateList.add(heartRate)
+                }
             }
-            heartRate = heartBeatDetector.getHeartRate()
+
             isMeasuring = false
-            if(heartRate > 0) {
-                onResult(heartRate)
+            if(heartRateList.isNotEmpty()) {
+                val average = heartRateList.sum().toDouble() / heartRateList.size
+                viewModel.addRecord(BPMHistory(heartRate = average.toInt(), timeDate = dateTime))
+                onResult(average.toInt())
+            }
+            else{
+                onBack()
             }
         }
     }
 
     Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        if (isMeasuring) {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 verticalArrangement = Arrangement.Center,
@@ -99,7 +115,6 @@ fun MeasureScreen(onResult: (Int) -> Unit) {
                         modifier = Modifier
                             .size(200.dp)
                             .scale(scale)
-
                     )
                     Text(
                         text = if (heartRate == -1) "--\nbpm" else "${heartBeatDetector.getHeartRate()}\nbpm",
@@ -119,39 +134,7 @@ fun MeasureScreen(onResult: (Int) -> Unit) {
                 )
             }
 
-        } else {
-
-            Column(horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceEvenly) {
-
-                Text(
-                    text = "Виконай своє перше вимірювання!",
-                    style = MaterialTheme.typography.h4,
-                    modifier = Modifier.padding(16.dp)
-                )
-
-                Image(
-                    painter = painterResource(id = R.drawable.heart_loading_img),
-                    contentDescription = "Onboarding image 1",
-                    modifier = Modifier
-                        .size(250.dp)
-                )
-
-                Spacer(modifier = Modifier.height(200.dp))
-
-                Image(
-                    painter = painterResource(id = R.drawable.ic_measure_button),
-                    contentDescription = "Onboarding image 1",
-                    modifier = Modifier
-                        .size(200.dp)
-                        .clickable {isMeasuring = true  }
-                )
-
-                Spacer(modifier = Modifier.height(16.dp))
-
-            }
         }
-    }
 }
 @Composable
 fun CameraPreview(heartBeatDetector: HeartBeatDetector) {
@@ -215,4 +198,9 @@ private fun startCameraPreview(
         preview,
         imageAnalysis
     )
+}
+
+
+fun List<Int>.average(){
+
 }

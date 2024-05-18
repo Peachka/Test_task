@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
@@ -25,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import com.example.testtaskheartrate.R
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -32,7 +34,12 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import com.example.testtaskheartrate.ui.theme.dimens
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -47,10 +54,12 @@ fun LoadingScreen(
 ) {
 
     var progress by remember { mutableStateOf(0f) }
+    var indicator by remember { mutableStateOf(0) }
     val infiniteTransition = rememberInfiniteTransition(label = "")
+
     val scale by infiniteTransition.animateFloat(
         initialValue = 1f,
-        targetValue = 1.2f,
+        targetValue = 1.5f,
         animationSpec = infiniteRepeatable(
             animation = tween(durationMillis = 2000, easing = FastOutSlowInEasing),
             repeatMode = RepeatMode.Reverse
@@ -62,6 +71,7 @@ fun LoadingScreen(
         while (progress < 1f) {
             delay(100)
             progress += 0.05f
+            indicator += 5
         }
         if (isOnboardingComplete) {
             goAfterSecondLoading()
@@ -72,8 +82,8 @@ fun LoadingScreen(
 
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colorScheme.primary),
+            .fillMaxSize(),
+//            .background(MaterialTheme.colorScheme.primary),
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -82,27 +92,42 @@ fun LoadingScreen(
             painter = painterResource(id = R.drawable.heart_loading_img),
             contentDescription = "Loading Image",
             modifier = Modifier
-                .size(300.dp)
+                .size(250.dp)
                 .scale(scale)
 
         )
         Text(
             text = "Heart Rate",
-            fontSize = 75.sp
+            style = MaterialTheme.typography.headlineLarge
         )
 
-        androidx.compose.material.LinearProgressIndicator(
-            progress = progress,
-            modifier = Modifier
-                .padding(top = 32.dp)
-                .width(300.dp)
-                .height(30.dp),
-            color = MaterialTheme.colorScheme.secondary,
-            backgroundColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f)
-        )
-        Spacer(modifier = Modifier.height(25.dp))
+        Box(
+            modifier = Modifier.fillMaxWidth(),
+            contentAlignment = Alignment.Center
+        ) {
+
+            androidx.compose.material.LinearProgressIndicator(
+                progress = progress,
+                modifier = Modifier
+                    .padding(MaterialTheme.dimens.small2)
+                    .fillMaxWidth()
+                    .height(MaterialTheme.dimens.medium1)
+                    .clip(shape = RoundedCornerShape(15.dp)),
+                color = MaterialTheme.colorScheme.secondary,
+                backgroundColor = MaterialTheme.colorScheme.secondary.copy(alpha = 0.5f)
+            )
+            Text(
+                text = indicator.toString() + "%",
+                color = Color.White,
+                style = MaterialTheme.typography.labelLarge
+            )
+        }
     }
-
-
 }
 
+
+//@Preview
+//@Composable
+//fun PreviewLoadingScreen() {
+//    LoadingScreen({}, {}, false)
+//}
