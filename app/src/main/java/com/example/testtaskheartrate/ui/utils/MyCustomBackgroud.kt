@@ -12,8 +12,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.tooling.preview.Preview
-import com.example.testtaskheartrate.ui.loading_screen.LoadingScreen
+
 
 @Composable
 fun AppBackground(
@@ -30,13 +29,11 @@ fun AppBackground(
             val canvasWidth = size.width
             val canvasHeight = size.height
 
-            // Draw the white background
             drawRect(
                 color = Color.White,
                 size = size
             )
 
-            // Draw the blue top area
             drawRoundRect(
                 color = blueColor,
                 topLeft = Offset(0f, -400f),

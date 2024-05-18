@@ -4,7 +4,6 @@ import java.util.Calendar
 import java.text.SimpleDateFormat
 import java.util.Locale
 
-// Your existing getCurrentDateTime() function
 class GetCurrentTime(){
     fun getCurrentDateTime(): String {
         val calendar = Calendar.getInstance()

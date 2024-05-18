@@ -7,7 +7,7 @@ class MedicalCardsRepository {
     private val medicalCards = mutableListOf<MedicalCard>()
 
     init {
-        // Initialize the list with some sample data
+
         medicalCards.add(
             MedicalCard(
                 id = 1,

@@ -46,7 +46,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        // Initialize the CameraUtils instance
         cameraUtils = CameraUtils(this, this)
 
         setContent {
@@ -95,7 +94,6 @@ fun NavigationGraph(
         composable(Screen.OnboardingScreen1.route) {
             AppBackground {
                 BackHandler {
-                    // Remove all previous screens, excluding the current screen
                     navController.popBackStack(
                         route = Screen.OnboardingScreen1.route,
                         inclusive = false
@@ -132,13 +130,8 @@ fun NavigationGraph(
         }
         composable(Screen.HomePage.route) {
             val context = LocalContext.current
-            // Set onboarding completed when MeasureScreen is reached
             PreferencesManager.setOnboardingCompleted(context, true)
 
-            BackHandler {
-                // Remove all previous screens, excluding the current screen
-//                navController.popBackStack(route = Screen.HomePage.route, inclusive = false)
-            }
             HomePage(
                 startMeasure = { navController.navigate(Screen.MeasureScreen.route) },
                 goToIndicatorScreen = { navController.navigate(Screen.IndicatorScreen.route) },
@@ -180,7 +173,6 @@ fun NavigationGraph(
             if (heartRate != null) {
                 AppBackground {
                     BackHandler {
-                        // Remove all previous screens, excluding the current screen
                         navController.popBackStack(route = Screen.HomePage.route, inclusive = false)
                     }
                     HeartRateResultScreen(heartRate = heartRate,

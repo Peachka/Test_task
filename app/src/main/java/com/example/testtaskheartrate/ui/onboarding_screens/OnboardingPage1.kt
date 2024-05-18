@@ -1,7 +1,7 @@
 package com.example.testtaskheartrate.ui.onboarding_screens
 
 
-import androidx.compose.foundation.ExperimentalFoundationApi
+
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -12,29 +12,19 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.Alignment
 import androidx.compose.material3.Text
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBars
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.sp
 import com.example.testtaskheartrate.R
-import com.example.testtaskheartrate.ui.loading_screen.LoadingScreen
 import com.example.testtaskheartrate.ui.theme.dimens
 
 @Composable
@@ -46,7 +36,6 @@ fun OnboardingPage1(
     Column(
         modifier = Modifier
             .fillMaxSize(),
-//            .background(MaterialTheme.colorScheme.primary),
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -105,7 +94,7 @@ fun OnboardingPage1(
                         disabledContainerColor = Color.Gray,
                         disabledContentColor = Color.White
                     ),
-                    shape = MaterialTheme.shapes.extraLarge, // Or any other desired shape
+                    shape = MaterialTheme.shapes.extraLarge,
                     onClick = {
                         onNextPage()
                         onPageIndexChanged(1)
@@ -121,9 +110,3 @@ fun OnboardingPage1(
     }
 }
 
-//@Preview
-//@Composable
-//fun PreviewPage1(){
-//    OnboardingPage1( 1, {},{ 1} )
-//}
-//

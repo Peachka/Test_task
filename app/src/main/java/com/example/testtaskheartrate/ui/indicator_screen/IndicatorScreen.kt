@@ -42,7 +42,6 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -239,7 +238,7 @@ private fun BPMIndicator(
                 val canvasWidth = size.width
                 val canvasHeight = size.height
 
-                // Draw the blue top area
+
                 drawRoundRect(
                     color = blueColor,
                     topLeft = Offset(0f, 0f),
@@ -267,8 +266,6 @@ private fun BPMIndicator(
                     style = MaterialTheme.typography.labelMedium
                 )
                 ListItemPicker(
-//                        modifier = Modifier.size(150.dp),
-
                     dividersColor = Color.Black.copy(0.8f),
                     value = pickerValue,
                     list = range.toList(),
@@ -290,12 +287,4 @@ private fun BPMIndicator(
         Log.e("pickerValue = ", pickerValue.toString())
     }
 }
-
-//@Preview
-//@Composable
-//fun IndicatorScreenPreview() {
-//
-//
-//    IndicatorScreen(viewModel = hiltViewModel(), {})
-//}
 

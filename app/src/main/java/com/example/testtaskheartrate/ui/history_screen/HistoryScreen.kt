@@ -101,9 +101,9 @@ fun HistoryScreen(
                     }
                 }
 
-                val itemCount = uiState.historyListItems.size // Adjust this as necessary
-                val itemHeight = 120.dp // Height of each item + padding
-                val visibleItems = 6 // Number of visible items in the viewport
+                val itemCount = uiState.historyListItems.size
+                val itemHeight = 120.dp
+                val visibleItems = 6
 
                 val density = LocalDensity.current
 
@@ -143,9 +143,6 @@ fun HistoryScreen(
 
 @Composable
 private fun RecordCard(item: HistoryListItem) {
-//    val (time, date) =  item.timeDate.split(" ")
-
-    Log.e("RecordCard", item.timeDate)
 
     Row(
         modifier = Modifier

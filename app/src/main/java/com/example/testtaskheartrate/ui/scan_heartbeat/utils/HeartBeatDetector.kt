@@ -60,14 +60,11 @@ class HeartBeatDetector {
 
     @Synchronized
     fun getHeartRate(): Int {
-//        if (redValues.size < sampleSize) {
-//            return -1 // Not enough data
-//        }
 
         var heartRate = 0
         val signal = redValues.map { it.toDouble() }
         if (signal.all { it < 30.0 }) {
-            return -1 // Return -1 if all values are lower than 30
+            return -1
         }
 
         val peaks = findPeaks(signal, sampleSize / 4, sampleSize / 4)

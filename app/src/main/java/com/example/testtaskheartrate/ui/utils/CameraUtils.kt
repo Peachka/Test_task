@@ -7,7 +7,6 @@ import android.content.pm.PackageManager
 import androidx.activity.ComponentActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.core.content.ContextCompat
 
@@ -19,12 +18,9 @@ class CameraUtils(
     private val cameraPermissionRequest = componentActivity.registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
-        // Handle the permission result
         if (isGranted) {
-            // Permission granted, you can proceed with camera-related operations
             onCameraPermissionGranted()
         } else {
-            // Permission denied, handle accordingly
             onCameraPermissionDenied()
         }
     }
@@ -45,27 +41,22 @@ class CameraUtils(
                 context,
                 Manifest.permission.CAMERA
             ) == PackageManager.PERMISSION_GRANTED -> {
-                // Permission granted, you can proceed with camera-related operations
                 onCameraPermissionGranted()
             }
-            shouldShowRequestPermissionRationale(Manifest.permission.CAMERA) -> {
-                // Show an explanation to the user for requesting the permission
+            showRequestPermissionRationale(Manifest.permission.CAMERA) -> {
                 showPermissionRationale()
             }
             else -> {
-                // Request the camera permission
                 cameraPermissionRequest.launch(Manifest.permission.CAMERA)
             }
         }
     }
 
-    private fun shouldShowRequestPermissionRationale(permission: String): Boolean {
-        // Implement the logic for showing a permission rationale if needed
+    private fun showRequestPermissionRationale(permission: String): Boolean {
         return false
     }
 
     private fun showPermissionRationale() {
-        // Implement the logic for showing a permission rationale if needed
     }
 }
 

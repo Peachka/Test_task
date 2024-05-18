@@ -15,14 +15,4 @@ class MedicalRecommendationsViewModel @Inject constructor(): ViewModel() {
     private val _selectedMedicalCard = MutableStateFlow<MedicalCard?>(null)
     val selectedMedicalCard: StateFlow<MedicalCard?> = _selectedMedicalCard
 
-
-
-//    fun selectMedicalCard(medicalCard: MedicalCard, goToDetailsScreen: () -> Unit) {
-//        _selectedMedicalCard.value = medicalCard
-//        if (selectedMedicalCard != null) {
-//            Log.e("Log from MedicalRecommendationsViewModel selectedMedicalCard", _selectedMedicalCard.value!!.description)
-//        }
-//        goToDetailsScreen()
-//
-//    }
 }

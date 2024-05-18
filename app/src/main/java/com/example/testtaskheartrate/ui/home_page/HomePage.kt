@@ -7,14 +7,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
@@ -46,7 +43,6 @@ fun HomePage(
                 backgroundColor = MaterialTheme.colorScheme.secondary,
                 title = { Text("") },
                 actions = {
-                    // Add your top app bar actions here
                     IconButton(onClick = { goToHistoryScreen() }) {
                         Row() {
                             Text(
@@ -70,7 +66,6 @@ fun HomePage(
             Column(
                 modifier = Modifier
                     .fillMaxSize(),
-//            .background(MaterialTheme.colorScheme.primary),
                 verticalArrangement = Arrangement.SpaceBetween,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -115,7 +110,7 @@ fun HomePage(
                                 .clickable {
                                     cameraUtils.requestCameraPermission(
                                         onGranted = startMeasure,
-                                        onDenied = { /* Handle permission denied */ }
+                                        onDenied = { /* У випадку відмови */ }
                                     )
                                 }
                         )
@@ -134,8 +129,3 @@ fun HomePage(
     }
 }
 
-//@Preview
-//@Composable
-//fun PreviewHomePage() {
-//    HomePage({}, {})
-//}

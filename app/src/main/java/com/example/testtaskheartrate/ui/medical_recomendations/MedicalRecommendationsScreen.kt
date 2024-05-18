@@ -24,7 +24,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.testtaskheartrate.R
 import com.example.testtaskheartrate.data.MedicalCardsRepository
 import com.example.testtaskheartrate.data.model.MedicalCard
@@ -80,7 +79,7 @@ fun MedicalRecommendationsScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .verticalScroll(scrollState)
-                        .padding(end = 10.dp) // Space for scrollbar
+                        .padding(end = 10.dp)
                 ) {
                     medicalCards.forEach { it ->
                         RecordCard(
@@ -89,7 +88,6 @@ fun MedicalRecommendationsScreen(
                             title = it.titleName,
                             description = it.description,
                             onClick = { goToDetailsScreen(it.id) }
-//
                         )
                     }
                 }
@@ -110,7 +108,6 @@ fun RecordCard(id: Int, imageRes: Int, title: String, description: Int, onClick:
             },
 
         verticalAlignment = Alignment.CenterVertically,
-//        horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Box(
             modifier = Modifier
@@ -124,8 +121,6 @@ fun RecordCard(id: Int, imageRes: Int, title: String, description: Int, onClick:
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.CenterStart,
                 modifier = Modifier.size(150.dp),
-                // Crop the image to fill the available space
-
             )
         }
 

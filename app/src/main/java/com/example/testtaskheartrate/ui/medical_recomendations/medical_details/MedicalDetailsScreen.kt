@@ -11,15 +11,12 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
@@ -32,12 +29,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.testtaskheartrate.R
 import com.example.testtaskheartrate.data.MedicalCardsRepository
-import com.example.testtaskheartrate.data.model.MedicalCard
-import com.example.testtaskheartrate.ui.utils.AppBackground
+
 
 
 @Composable
@@ -95,7 +90,7 @@ fun MedicalDetailsScreen(
                     modifier = Modifier
                         .fillMaxSize()
                         .verticalScroll(scrollState)
-                        .padding(top = 5.dp, end = 10.dp) // Space for scrollbar
+                        .padding(top = 5.dp, end = 10.dp)
                 ) {
                     if (medicalCard != null) {
                         RecordCard(
@@ -117,8 +112,7 @@ fun RecordCard(imageRes: Int,  description: Int) {
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.onPrimary, RoundedCornerShape(10.dp)),
 
-        horizontalAlignment = Alignment.CenterHorizontally,
-//        horizontalArrangement = Arrangement.spacedBy(16.dp)
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Box(
             modifier = Modifier
@@ -132,8 +126,6 @@ fun RecordCard(imageRes: Int,  description: Int) {
                 contentScale = ContentScale.Crop,
                 alignment = Alignment.Center,
                 modifier = Modifier.fillMaxSize(),
-                // Crop the image to fill the available space
-
             )
         }
 
@@ -148,16 +140,9 @@ fun RecordCard(imageRes: Int,  description: Int) {
                 text = stringResource(id = description),
                 style = MaterialTheme.typography.bodyMedium,
                 color = Color.Black,
-//                maxLines = 4,
                 overflow = TextOverflow.Ellipsis,
                 textAlign = TextAlign.Center
             )
         }
     }
 }
-
-//@Preview
-//@Composable
-//fun MedCard(){
-//    MedicalDetailsScreen()
-//}

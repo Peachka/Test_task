@@ -30,7 +30,6 @@ val Roboto = FontFamily(
     )
 )
 
-// Set of Material typography styles to start with
 val CompactTypography = Typography(
     headlineLarge = TextStyle(
         fontFamily = Roboto,

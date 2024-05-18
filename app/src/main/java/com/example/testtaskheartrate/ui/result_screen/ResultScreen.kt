@@ -69,9 +69,8 @@ fun HeartRateResultScreen(
                 backgroundColor = MaterialTheme.colorScheme.secondary,
                 title = { androidx.compose.material.Text("") },
                 actions = {
-                    // Add your top app bar actions here
-                    Row (modifier = Modifier.fillMaxWidth()
-                    ,
+
+                    Row (modifier = Modifier.fillMaxWidth(),
                         horizontalArrangement = Arrangement.SpaceBetween,
                         verticalAlignment = Alignment.CenterVertically){
                         Text(text = "Результат",
@@ -106,8 +105,6 @@ fun HeartRateResultScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
 
                 ) {
-
-
                 Box(
                     modifier = Modifier
                         .width( width = 350.dp)
@@ -118,14 +115,11 @@ fun HeartRateResultScreen(
                     Column(modifier = Modifier.padding(7.dp)) {
                         Text(
                             text = "Ваш Результат",
-//            style = MaterialTheme.typography.h5
                         )
                         Row() {
                             Text(
-//                        modifier = Modifier.weight(1f),
                                 text = "$resultText - $heartRate",
                                 color = resultColor,
-//            style = MaterialTheme.typography.h4
                             )
                             Spacer(modifier = Modifier.width(140.dp))
                             Row(
@@ -140,7 +134,6 @@ fun HeartRateResultScreen(
                                 Text(
                                     modifier = Modifier.weight(0.5f),
                                     text = "${timestamp.split(" ")[0]} \n ${timestamp.split(" ")[1].trim()}"
-//            style = MaterialTheme.typography.body1
                                 )
                             }
 
@@ -183,7 +176,7 @@ fun HeartRateResultScreen(
                         disabledContainerColor = Color.Gray,
                         disabledContentColor = Color.White
                     ),
-                    shape = MaterialTheme.shapes.extraLarge, // Or any other desired shape
+                    shape = MaterialTheme.shapes.extraLarge,
                     onClick = goToHomeScreen
                 ) {
                     Text(text = "Готово")
@@ -263,7 +256,7 @@ fun CircleCanvas(
 ) {
     Canvas(
         modifier = modifier
-            .size(5.dp) // Adjust the size of the Canvas as needed
+            .size(5.dp)
     ) {
         val centerX = size.width / 100
         val centerY = size.height / 100
